@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>REPUESTOS CESAR | Taller Profesional</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800;14..32,900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0c10;
+      color: #eef2ff;
+      scroll-behavior: smooth;
+    }
+
+    /* === NAVBAR === */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f5c518;
+    }
+
+    .logo h1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.9rem;
+      color: #f5c518;
+    }
+    .logo p {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #f5c518;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .nav-links li a:hover { color: #f5c518; }
+
+    /* === HERO: SOLO LA PORTADA, SIN TEXTO ENCIMA === */
+    .hero {
+      min-height: 100vh;
+      background: url('portada.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* === BOTONES FLOTANTES === */
+    .floating-buttons {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 999;
+    }
+    .btn-float {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: 0.2s;
+    }
+    .btn-float:hover { transform: scale(1.1); }
+    .whatsapp-float { background: #25D366; }
+    .call-float { background: #0077b6; }
+
+    /* === CARRUSEL === */
+    .carrusel-section { background: #0f1117; padding: 80px 20px; }
+    .section-title {
+      text-align: center;
+      font-size: 2.8rem;
+      font-family: 'Bebas Neue', cursive;
+      color: #f5c518;
+      margin-bottom: 50px;
+    }
+    .carrusel-container {
+      position: relative;
+      max-width: 1000px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 28px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.6);
+      border: 1px solid #f5c51830;
+    }
+    .carrusel-slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .slide {
+      min-width: 100%;
+    }
+    .slide img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+    .carrusel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.7);
+      color: #f5c518;
+      border: none;
+      font-size: 2rem;
+      padding: 10px 18px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    .carrusel-btn:hover { background: #f5c518; color: black; }
+    .prev { left: 15px; }
+    .next { right: 15px; }
+
+    /* === ESPECIALIDADES === */
+    .servicios { background: #0a0c10; padding: 80px 20px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 35px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: #161a22;
+      padding: 30px;
+      text-align: center;
+      border-radius: 24px;
+      border-bottom: 4px solid #f5c518;
+      transition: 0.3s;
+    }
+    .card:hover { transform: translateY(-8px); background: #1f2632; }
+    .card i { font-size: 3rem; color: #f5c518; margin-bottom: 20px; }
+    .card h3 { font-size: 1.8rem; margin-bottom: 10px; }
+
+    /* === SECCIÓN MVV (Misión, Visión, Valores) === */
+    .mvv-section {
+      background: linear-gradient(135deg, #0b0f17, #06080e);
+      padding: 80px 20px;
+    }
+    .mvv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .mvv-item {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 32px;
+      padding: 40px 25px;
+      text-align: center;
+      border: 1px solid rgba(245,197,24,0.3);
+      transition: 0.3s;
+    }
+    .mvv-item:hover {
+      border-color: #f5c518;
+      transform: translateY(-5px);
+    }
+    .mvv-item i {
+      font-size: 3.5rem;
+      color: #f5c518;
+      margin-bottom: 25px;
+    }
+    .mvv-item h3 {
+      font-size: 2rem;
+      font-family: 'Bebas Neue', cursive;
+      color: #f5c518;
+      margin-bottom: 20px;
+    }
+    .mvv-item p {
+      line-height: 1.6;
+      color: #ddd;
+    }
+    .valores-list {
+      list-style: none;
+      text-align: left;
+      margin-top: 15px;
+    }
+    .valores-list li {
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .valores-list li i {
+      font-size: 1.2rem;
+      margin: 0;
+      color: #f5c518;
+    }
+
+    /* === TARJETA DIGITAL === */
+    .tarjeta-digital {
+      background: linear-gradient(145deg, #11161f, #080b10);
+      border-radius: 48px;
+      padding: 40px;
+      max-width: 700px;
+      margin: 80px auto 60px;
+      text-align: center;
+      border: 1px solid #f5c518aa;
+      box-shadow: 0 20px 30px -10px black;
+    }
+    .tarjeta-digital h3 {
+      font-size: 2rem;
+      color: #f5c518;
+      margin-bottom: 10px;
+    }
+    .telefonos {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .telefonos i {
+      margin-right: 10px;
+      color: #f5c518;
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+    }
+    .btn-whatsapp:hover { transform: scale(1.05); }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #030507;
+      border-top: 1px solid #f5c51830;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .menu-icon { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 70%;
+        height: 100vh;
+        background: #0a0c10ef;
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        padding-top: 40px;
+        transition: 0.3s;
+        gap: 2rem;
+      }
+      .nav-links.active { left: 0; }
+      .hero {
+        background-attachment: scroll;
+      }
+      .section-title { font-size: 2rem; }
+      .telefonos { font-size: 1.3rem; }
+      .slide img { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">
+    <h1>REPUESTOS CESAR</h1>
+    <p>taller profesional</p>
+  </div>
+  <div class="menu-icon" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#carrusel">Galería</a></li>
+    <li><a href="#mvv">MVV</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</div>
+
+<!-- HERO: SOLO LA PORTADA, SIN NADA ENCIMA -->
+<section id="inicio" class="hero"></section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades" class="servicios">
+  <div class="section-title">ESPECIALIDADES</div>
+  <div class="grid">
+    <div class="card"><i class="fas fa-car-side"></i><h3>SUSPENSIÓN</h3><p>Amortiguadores, rótulas, estabilidad total</p></div>
+    <div class="card"><i class="fas fa-microchip"></i><h3>MOTOR</h3><p>Diagnóstico, repuestos originales, potencia</p></div>
+    <div class="card"><i class="fas fa-steering-wheel"></i><h3>DIRECCIÓN</h3><p>Precisión, cremalleras, hidráulica</p></div>
+    <div class="card"><i class="fas fa-oil-can"></i><h3>LUBRICACIÓN</h3><p>Aceites, filtros, rendimiento asegurado</p></div>
+  </div>
+</section>
+
+<!-- CARRUSEL -->
+<div class="carrusel" id="carrusel">
+  <div class="carrusel-slide active">
+    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&fit=crop" alt="Mecánico">
+  </div>
+  <div class="carrusel-slide">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&fit=crop" alt="Herrería">
+  </div>
+  <div class="carrusel-slide">
+    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&fit=crop" alt="Tapicería">
+  </div>
+  <div class="carrusel-slide">
+    <img src="https://images.unsplash.com/photo-1581092160562-40aa6e8b1c0a?w=800&fit=crop" alt="Taller">
+  </div>
+</div>    <button class="carrusel-btn next" id="nextBtn">❯</button>
+  </div>
+</section></section><!-- SECCIÓN MVV -->
+<section id="mvv" class="mvv-section">
+  <div class="section-title">MISIÓN · VISIÓN · VALORES</div>
+  <div class="mvv-grid">
+    <div class="mvv-item">
+      <i class="fas fa-bullseye"></i>
+      <h3>MISIÓN</h3>
+      <p>Proveer repuestos de alta calidad y servicio técnico especializado en suspensión, motor, dirección y lubricación, garantizando la satisfacción y seguridad de nuestros clientes en Cúcuta.</p>
+    </div>
+    <div class="mvv-item">
+      <i class="fas fa-eye"></i>
+      <h3>VISIÓN</h3>
+      <p>Ser el taller de repuestos más confiable y reconocido del sector, expandiendo nuestra presencia digital y física con los más altos estándares de calidad.</p>
+    </div>
+    <div class="mvv-item">
+      <i class="fas fa-gem"></i>
+      <h3>VALORES</h3>
+      <ul class="valores-list">
+        <li><i class="fas fa-check-circle"></i> Confianza y transparencia</li>
+        <li><i class="fas fa-check-circle"></i> Honestidad en cada repuesto</li>
+        <li><i class="fas fa-check-circle"></i> Responsabilidad técnica</li>
+        <li><i class="fas fa-check-circle"></i> Rapidez en el servicio</li>
+        <li><i class="fas fa-check-circle"></i> Garantía en todos los productos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TARJETA DIGITAL -->
+<section id="contacto">
+  <div class="tarjeta-digital">
+    <h3><i class="fas fa-id-card"></i> REPUESTOS CESAR</h3>
+    <p style="font-size:1.2rem;">taller profesional</p>
+    <div class="telefonos">
+      <p><i class="fab fa-whatsapp"></i> 321 9119621</p>
+      <p><i class="fas fa-phone-alt"></i> 310 3533593</p>
+    </div>
+    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+      <a href="https://wa.me/573219119621" target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+573103533593" class="btn-whatsapp" style="background: #0077b6;"><i class="fas fa-phone"></i> Llamar</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 REPUESTOS CESAR - Taller profesional con experiencia y garantía</p>
+</footer>
+
+<!-- BOTONES FLOTANTES -->
+<div class="floating-buttons">
+  <a href="https://wa.me/573219119621" class="btn-float whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:+573103533593" class="btn-float call-float"><i class="fas fa-phone-alt"></i></a>
+</div>
+
+<script>
+  // Menú hamburguesa
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('active'));
+  });
+
+  // Carrusel
+  const slides = document.querySelectorAll('.slide');
+  const carruselSlides = document.getElementById('carruselSlides');
+  let index = 0;
+  const total = slides.length;
+  function updateCarrusel() {
+    carruselSlides.style.transform = `translateX(-${index * 100}%)`;
+  }
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    index = (index + 1) % total;
+    updateCarrusel();
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    index = (index - 1 + total) % total;
+    updateCarrusel();
+  });
+  setInterval(() => {
+    index = (index + 1) % total;
+    updateCarrusel();
+  }, 5000);
+</script>
+</body>
+</html>
